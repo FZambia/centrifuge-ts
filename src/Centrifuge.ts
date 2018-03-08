@@ -442,6 +442,10 @@ export class Centrifuge extends Observable {
             }
         }
 
+        if (config.info && !isString(config.info)) {
+            Centrifuge.log('Configuration parameter \'info\' expected to be string');
+        }
+
         this._config = config;
     }
 
@@ -742,7 +746,7 @@ export class Centrifuge extends Observable {
             if ('info' in data) {
                 this._config.info = data.info;
             } else {
-                data.info = null;
+                data.info = '';
             }
             if (this.isDisconnected) {
                 this.debug('Credentials refreshed, connect from scratch');
